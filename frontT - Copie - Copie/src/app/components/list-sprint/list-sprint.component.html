@@ -1,0 +1,8 @@
+
+
+    <div
+    cdkDropList [cdkDropListData]="CardsS" class="example-list"
+(cdkDropListDropped)="drop($event)">
+
+    <app-card-sprint  class="example-box" *ngFor="let item of CardsS "[cardS]="item" cdkDrag>
+    </app-card-sprint>    </div>

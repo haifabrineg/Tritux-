@@ -1,0 +1,185 @@
+
+
+<div  cdkDropListGroup>
+ 
+    <div  *ngFor="let l of lists"   class="example-container exemple-box1" cdkDrag>
+    
+    
+      <div class="card  move-on-hover card123"  >
+        <div class="card-body example-container">
+          <button type="button" class="btn-close text-dark float-right"  (click)="deleteListe(l.id)">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        <div>
+        <h2  data-bs-toggle="modal" data-bs-target="#jkanban-info-modal12" >{{l.name}}</h2></div>
+        <button class="m-1 btn bg-gradient-primary btn-sm" data-bs-toggle="modal" data-bs-target="#jkanban-info-modal1" (click)="click(l.id)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square-dotted" viewBox="0 0 16 16">
+            <path d="M2.5 0c-.166 0-.33.016-.487.048l.194.98A1.51 1.51 0 0 1 2.5 1h.458V0H2.5zm2.292 0h-.917v1h.917V0zm1.833 0h-.917v1h.917V0zm1.833 0h-.916v1h.916V0zm1.834 0h-.917v1h.917V0zm1.833 0h-.917v1h.917V0zM13.5 0h-.458v1h.458c.1 0 .199.01.293.029l.194-.981A2.51 2.51 0 0 0 13.5 0zm2.079 1.11a2.511 2.511 0 0 0-.69-.689l-.556.831c.164.11.305.251.415.415l.83-.556zM1.11.421a2.511 2.511 0 0 0-.689.69l.831.556c.11-.164.251-.305.415-.415L1.11.422zM16 2.5c0-.166-.016-.33-.048-.487l-.98.194c.018.094.028.192.028.293v.458h1V2.5zM.048 2.013A2.51 2.51 0 0 0 0 2.5v.458h1V2.5c0-.1.01-.199.029-.293l-.981-.194zM0 3.875v.917h1v-.917H0zm16 .917v-.917h-1v.917h1zM0 5.708v.917h1v-.917H0zm16 .917v-.917h-1v.917h1zM0 7.542v.916h1v-.916H0zm15 .916h1v-.916h-1v.916zM0 9.375v.917h1v-.917H0zm16 .917v-.917h-1v.917h1zm-16 .916v.917h1v-.917H0zm16 .917v-.917h-1v.917h1zm-16 .917v.458c0 .166.016.33.048.487l.98-.194A1.51 1.51 0 0 1 1 13.5v-.458H0zm16 .458v-.458h-1v.458c0 .1-.01.199-.029.293l.981.194c.032-.158.048-.32.048-.487zM.421 14.89c.183.272.417.506.69.689l.556-.831a1.51 1.51 0 0 1-.415-.415l-.83.556zm14.469.689c.272-.183.506-.417.689-.69l-.831-.556c-.11.164-.251.305-.415.415l.556.83zm-12.877.373c.158.032.32.048.487.048h.458v-1H2.5c-.1 0-.199-.01-.293-.029l-.194.981zM13.5 16c.166 0 .33-.016.487-.048l-.194-.98A1.51 1.51 0 0 1 13.5 15h-.458v1h.458zm-9.625 0h.917v-1h-.917v1zm1.833 0h.917v-1h-.917v1zm1.834-1v1h.916v-1h-.916zm1.833 1h.917v-1h-.917v1zm1.833 0h.917v-1h-.917v1zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+          </svg>&nbsp;&nbsp;&nbsp;New Card</button>
+
+        <div class="hidden opacity-50 fixed inset-0 z-40 bg-black" id="new-board-modal-backdrop"></div>
+      
+            <app-lis-table  [idl]="l.id" ></app-lis-table>
+      </div>
+</div>
+<div class="modal  container-fluid py-4" id="jkanban-info-modal12" style="display: true" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+  <div class="modal-content">
+  <div class="modal-header">
+  <h5 class="h5 modal-title">Update list</h5>
+  <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+  </button>
+  </div>
+  <div class="pt-4 modal-body">
+   
+  <input id="jkanban-task-id" class="d-none" />
+  <div class="mb-4 input-group">
+  <span class="input-group-text">
+    <i class="fas fa-edit"></i>  </span>
+  <input class="form-control" placeholder={{l.name}} type="text"  id="jkanban-task-title"  [(ngModel)]="ListUpdate.name"/>
+  </div>
+ 
+  <div class="alert alert-success d-none">Changes saved!</div>
+  <div class="text-end">
+  <button class="btn bg-gradient-primary"  (click)="updateListe(l.id)"  id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal12">
+  Save changes
+  </button>
+ 
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
+<div class="modal fade" id="jkanban-info-modal1" style="display: true" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+  <div class="modal-content">
+  <div class="modal-header">
+  <h5 class="h5 modal-title">New Card</h5>
+  <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+  </button>
+  </div>
+  <div class="pt-4 modal-body">
+  <input id="jkanban-task-id" class="d-none" />
+  <div class="mb-4 input-group">
+  <span class="input-group-text">
+  <i class="far fa-edit"></i>
+  </span>
+  <input class="form-control" placeholder="Card's description" type="text" [(ngModel)]="NewCard.description" id="jkanban-task-title" />
+  </div>
+  <div class="mb-4 input-group">
+      <span class="input-group-text">
+      <i class="far fa-edit"></i>
+      </span>
+      <input class="form-control" placeholder="Card's realisation" type="text" [(ngModel)]="NewCard.realisation" id="jkanban-task-title" />
+      </div>
+      <div class="mb-4 input-group">
+          <span class="input-group-text">
+          <i class="far fa-edit"></i>
+          </span>
+          <input class="form-control" placeholder="Card's estimation between 1 and 5" min="1" max="5" type="number" [(ngModel)]="NewCard.estimation" id="jkanban-task-title" />
+          </div>
+  <div class="alert alert-success d-none">Changes saved!</div>
+  <div class="text-end">
+  <button class="btn bg-gradient-primary"  id="jkanban-update-task" (click)="saveCard()"  >
+  Save Card
+  </button>
+ 
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+    </div>
+    <div  *ngFor="let s of Sprints"   class="example-container exemple-box1" cdkDrag>
+    
+    
+      <div class="card  move-on-hover card123"  >
+        <div class="card-body example-container">
+          <button type="button" class="btn-close text-dark float-right"  (click)="deleteSprint(s.id)">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        <div>
+        <h2  data-bs-toggle="modal" data-bs-target="#jkanban-info-modal12" >{{s.name}}</h2></div>
+        <button class="m-1 btn bg-gradient-primary btn-sm" data-bs-toggle="modal" data-bs-target="#jkanban-info-modalnewCardsprint" (click)="clickSprint(s.id)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square-dotted" viewBox="0 0 16 16">
+            <path d="M2.5 0c-.166 0-.33.016-.487.048l.194.98A1.51 1.51 0 0 1 2.5 1h.458V0H2.5zm2.292 0h-.917v1h.917V0zm1.833 0h-.917v1h.917V0zm1.833 0h-.916v1h.916V0zm1.834 0h-.917v1h.917V0zm1.833 0h-.917v1h.917V0zM13.5 0h-.458v1h.458c.1 0 .199.01.293.029l.194-.981A2.51 2.51 0 0 0 13.5 0zm2.079 1.11a2.511 2.511 0 0 0-.69-.689l-.556.831c.164.11.305.251.415.415l.83-.556zM1.11.421a2.511 2.511 0 0 0-.689.69l.831.556c.11-.164.251-.305.415-.415L1.11.422zM16 2.5c0-.166-.016-.33-.048-.487l-.98.194c.018.094.028.192.028.293v.458h1V2.5zM.048 2.013A2.51 2.51 0 0 0 0 2.5v.458h1V2.5c0-.1.01-.199.029-.293l-.981-.194zM0 3.875v.917h1v-.917H0zm16 .917v-.917h-1v.917h1zM0 5.708v.917h1v-.917H0zm16 .917v-.917h-1v.917h1zM0 7.542v.916h1v-.916H0zm15 .916h1v-.916h-1v.916zM0 9.375v.917h1v-.917H0zm16 .917v-.917h-1v.917h1zm-16 .916v.917h1v-.917H0zm16 .917v-.917h-1v.917h1zm-16 .917v.458c0 .166.016.33.048.487l.98-.194A1.51 1.51 0 0 1 1 13.5v-.458H0zm16 .458v-.458h-1v.458c0 .1-.01.199-.029.293l.981.194c.032-.158.048-.32.048-.487zM.421 14.89c.183.272.417.506.69.689l.556-.831a1.51 1.51 0 0 1-.415-.415l-.83.556zm14.469.689c.272-.183.506-.417.689-.69l-.831-.556c-.11.164-.251.305-.415.415l.556.83zm-12.877.373c.158.032.32.048.487.048h.458v-1H2.5c-.1 0-.199-.01-.293-.029l-.194.981zM13.5 16c.166 0 .33-.016.487-.048l-.194-.98A1.51 1.51 0 0 1 13.5 15h-.458v1h.458zm-9.625 0h.917v-1h-.917v1zm1.833 0h.917v-1h-.917v1zm1.834-1v1h.916v-1h-.916zm1.833 1h.917v-1h-.917v1zm1.833 0h.917v-1h-.917v1zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+          </svg>&nbsp;&nbsp;&nbsp;New Card</button>
+
+        <div class="hidden opacity-50 fixed inset-0 z-40 bg-black" id="new-board-modal-backdrop"></div>
+      
+            <app-list-sprint [ids]="s.id"></app-list-sprint>
+      </div>
+</div>
+<div class="modal  container-fluid py-4" id="jkanban-info-modalUpdateSprint" style="display: true" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+  <div class="modal-content">
+  <div class="modal-header">
+  <h5 class="h5 modal-title">Update sprint</h5>
+  <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+  </button>
+  </div>
+  <div class="pt-4 modal-body">
+   
+  <input id="jkanban-task-id" class="d-none" />
+  <div class="mb-4 input-group">
+  <span class="input-group-text">
+    <i class="fas fa-edit"></i>  </span>
+  <input class="form-control" placeholder={{s.name}} type="text"  id="jkanban-task-title"  [(ngModel)]="ListUpdate.name"/>
+  </div>
+ 
+  <div class="alert alert-success d-none">Changes saved!</div>
+  <div class="text-end">
+  <button class="btn bg-gradient-primary"  (click)="updateListe(s.id)"  id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal12">
+  Save changes
+  </button>
+ 
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
+<div class="modal fade" id="jkanban-info-modalnewCardsprint" style="display: true" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+  <div class="modal-content">
+  <div class="modal-header">
+  <h5 class="h5 modal-title">New Card</h5>
+  <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+  </button>
+  </div>
+  <div class="pt-4 modal-body">
+  <input id="jkanban-task-id" class="d-none" />
+  <div class="mb-4 input-group">
+  <span class="input-group-text">
+  <i class="far fa-edit"></i>
+  </span>
+  <input class="form-control" placeholder="Card's description" type="text" [(ngModel)]="NewCardSprint.description" id="jkanban-task-title" />
+  </div>
+  <div class="mb-4 input-group">
+      <span class="input-group-text">
+      <i class="far fa-edit"></i>
+      </span>
+      <input class="form-control" placeholder="Card's realisation" type="text" [(ngModel)]="NewCardSprint.realisation" id="jkanban-task-title" />
+      </div>
+      <div class="mb-4 input-group">
+          <span class="input-group-text">
+          <i class="far fa-edit"></i>
+          </span>
+          <input class="form-control" placeholder="Card's estimation between 1 and 5" min="1" max="5" type="number" [(ngModel)]="NewCardSprint.estimation" id="jkanban-task-title" />
+          </div>
+  <div class="alert alert-success d-none">Changes saved!</div>
+  <div class="text-end">
+  <button class="btn bg-gradient-primary"  id="jkanban-update-task" (click)="saveCardSprint()"  >
+  Save Card
+  </button>
+ 
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+    </div>
+</div>
